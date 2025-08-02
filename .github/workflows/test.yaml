@@ -1,0 +1,23 @@
+name: Test Project       # Nome da workflow
+
+on:                     # Evento que dispara a workflow
+  push:                 # Toda vez que houver push em qualquer branch
+
+jobs:                   # Definição dos jobs
+  test:                 # Identificador do job (nome customizável)
+    runs-on: ubuntu-latest   # Ambiente do runner
+
+    steps:               # Lista de passos do job
+      - name: Checkout repository    # Passo 1: baixar o código do repo
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js         # Passo 2: configurar Node.js (versão 18)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies   # Passo 3: instalar dependências via npm
+        run: npm install
+
+      - name: Run tests              # Passo 4: rodar testes automatizados
+        run: npm test
